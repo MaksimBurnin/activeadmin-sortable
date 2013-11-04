@@ -1,4 +1,4 @@
-//= require jquery-ui
+//= require jquery.ui.sortable
 
 (function($) {
   $(document).ready(function() {
