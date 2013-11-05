@@ -13,8 +13,9 @@
         $.ajax({
           url: url,
           type: 'post',
+          async: false,
           data: { position: ui.item.index() + 1 },
-          success: function() { window.location.reload() }
+          success: function(){}
         });
       }
     });
