@@ -18,7 +18,18 @@ module ActiveAdmin
 
       def sortable_handle_column
         column '', :class => "activeadmin-sortable" do |resource|
-          sort_url = url_for([:sort, :admin, resource])
+          path = [:sort, :admin]
+          params = {}
+          if active_admin_config.belongs_to?
+            parent_resource = active_admin_config.belongs_to_config.target.resource_class_name.downcase.delete('::')
+
+            params = {:id => resource.id}
+            path << parent_resource << resource
+          else
+            path << resource
+          end
+
+          sort_url = polymorphic_path path, params
           content_tag :span, HANDLE, :class => 'handle', 'data-sort-url' => sort_url
         end
       end
